@@ -46,7 +46,7 @@ const Hero: React.FC = () => {
           <div className="flex flex-col items-start gap-4 mb-12 mt-12 animate-spring-up" style={{ animationDelay: '200ms' }}>
             <div className="flex flex-wrap items-center gap-3">
               <span className="inline-block px-5 py-2 rounded-xl bg-orange-600 text-white font-black text-sm uppercase tracking-[0.2em] shadow-lg shadow-orange-600/20">
-                Wrocław • Pisarzowice • Miękinia • Wilkszyn • Leśnica • Głoska • Mrozów • Krępice •   
+                Wrocław • Pisarzowice • Miękinia • Wilkszyn • Leśnica • Głoska • Mrozów • Krępice
               </span>
             </div>
           </div>
@@ -59,6 +59,10 @@ const Hero: React.FC = () => {
             </span>
           </h1>
           
+          <p className="text-lg md:text-2xl text-white font-bold mb-6 max-w-2xl drop-shadow-md animate-spring-up" style={{ animationDelay: '600ms' }}>
+            Wymiana, wyważanie i naprawa opon: auta osobowe, 4x4, motocykle, quady, TIR, maszyny rolnicze i budowlane.
+          </p>
+
           <p className="text-xl md:text-2xl text-slate-200 mb-12 leading-relaxed max-w-2xl font-medium drop-shadow-md animate-spring-up" style={{ animationDelay: '700ms' }}>
             Od bezpiecznych przejazdów autostradą, przez górskie serpentyny, aż po ekstremalny off-road. MVM Patron to warsztat, który dba o Twój kontakt z podłożem.
           </p>

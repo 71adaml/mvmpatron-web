@@ -13,7 +13,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms }) => {
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-2">
             <p className="text-slate-400 max-sm mb-4">
-              Profesjonalny serwis opon w Pisarzowicach. Specjalizacja: wymiana opon na felgach premium oraz naprawy wulkanizacyjne.
+              Serwis opon w Pisarzowicach koło Wrocławia. Wymiana, wyważanie i naprawy wulkanizacyjne: auta osobowe, 4x4, motocykle, quady, TIR, maszyny rolnicze i budowlane.
             </p>
             <p className="text-slate-500 text-sm mb-4">
               ul. Wrocławska 32a, 55-330 Pisarzowice
