@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { OPENING_HOURS } from './openingHours';
 
 const Contact: React.FC = () => {
   // Używamy Plus Code: 6V52+88 Pisarzowice, Polska oraz nazwy firmy w dymku
@@ -7,6 +8,7 @@ const Contact: React.FC = () => {
   const companyName = "MVM Patron";
   const encodedQuery = encodeURIComponent(`${plusCode} (${companyName})`);
   const googleMapsUrl = `https://www.google.com/maps?q=${encodedQuery}&hl=pl&z=17&output=embed`;
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(plusCode)}`;
 
   return (
     <section id="kontakt" className="py-24 bg-white">
@@ -16,7 +18,7 @@ const Contact: React.FC = () => {
             <div className="reveal reveal-active">
               <h2 className="text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Skontaktuj się z nami</h2>
               <p className="text-lg text-slate-600 mb-10 font-medium">
-                Masz pytania dotyczące nietypowych śrub, naprawy gwintu lub chcesz umówić się na wymianę opon? Jesteśmy dostępni telefonicznie oraz mailowo. Zapraszamy do naszego warsztatu w Pisarzowicach.
+                Chcesz wymienić lub naprawić opony w aucie, motocyklu, ciężarówce albo maszynie rolniczej? Zadzwoń, a doradzimy i umówimy termin wizyty. Zapraszamy do warsztatu w Pisarzowicach, kilka minut od Wrocławia.
               </p>
 
               <div className="space-y-6">
@@ -34,6 +36,38 @@ const Contact: React.FC = () => {
                       ul. Wrocławska 32a<br/>
                       55-330 Pisarzowice (koło Wilkszyna)
                     </p>
+                    <a
+                      href={directionsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-xl bg-orange-600 text-white text-sm font-bold hover:bg-orange-700 transition-colors"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                      </svg>
+                      Nawiguj do warsztatu
+                    </a>
+                  </div>
+                </div>
+
+                {/* Opening Hours Card */}
+                <div className="flex items-start gap-5 p-6 rounded-3xl bg-slate-50 border border-slate-100 transition-all hover:shadow-lg">
+                  <div className="bg-orange-100 p-4 rounded-2xl text-orange-600 shadow-sm">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-slate-900 text-lg mb-1">Godziny otwarcia</h4>
+                    <ul className="text-slate-600 font-semibold leading-relaxed">
+                      {OPENING_HOURS.map((h) => (
+                        <li key={h.days} className="flex justify-between gap-4">
+                          <span>{h.short}</span>
+                          <span className="text-slate-900 whitespace-nowrap">{h.hours}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="text-sm text-orange-600 font-bold mt-2">Wizyty po wcześniejszym umówieniu telefonicznym.</p>
                   </div>
                 </div>
 

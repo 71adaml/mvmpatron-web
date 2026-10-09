@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
+import BookingInfo from './components/BookingInfo';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import AIAssistant from './components/AIAssistant';
@@ -27,6 +28,7 @@ const App: React.FC = () => {
       <main className="flex-grow">
         <Hero />
         <Services />
+        <BookingInfo />
         <Contact />
       </main>
 
