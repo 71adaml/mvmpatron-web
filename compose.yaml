@@ -24,6 +24,7 @@ services:
       - web
     environment:
       DOMAIN: ${DOMAIN:-localhost}
+      WWW_DOMAIN: ${WWW_DOMAIN:-www.localhost}
     ports:
       - "80:80"
       - "443:443"
