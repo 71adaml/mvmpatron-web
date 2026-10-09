@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { OPENING_HOURS } from './openingHours';
 
 const Contact: React.FC = () => {
   // Używamy Plus Code: 6V52+88 Pisarzowice, Polska oraz nazwy firmy w dymku
@@ -17,7 +18,7 @@ const Contact: React.FC = () => {
             <div className="reveal reveal-active">
               <h2 className="text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Skontaktuj się z nami</h2>
               <p className="text-lg text-slate-600 mb-10 font-medium">
-                Chcesz wymienić lub naprawić opony w aucie, motocyklu, ciężarówce albo maszynie rolniczej? Zadzwoń lub napisz, a doradzimy i ustalimy termin. Zapraszamy do warsztatu w Pisarzowicach, kilka minut od Wrocławia.
+                Chcesz wymienić lub naprawić opony w aucie, motocyklu, ciężarówce albo maszynie rolniczej? Zadzwoń, a doradzimy i umówimy termin wizyty. Zapraszamy do warsztatu w Pisarzowicach, kilka minut od Wrocławia.
               </p>
 
               <div className="space-y-6">
@@ -46,6 +47,27 @@ const Contact: React.FC = () => {
                       </svg>
                       Nawiguj do warsztatu
                     </a>
+                  </div>
+                </div>
+
+                {/* Opening Hours Card */}
+                <div className="flex items-start gap-5 p-6 rounded-3xl bg-slate-50 border border-slate-100 transition-all hover:shadow-lg">
+                  <div className="bg-orange-100 p-4 rounded-2xl text-orange-600 shadow-sm">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-slate-900 text-lg mb-1">Godziny otwarcia</h4>
+                    <ul className="text-slate-600 font-semibold leading-relaxed">
+                      {OPENING_HOURS.map((h) => (
+                        <li key={h.days} className="flex justify-between gap-4">
+                          <span>{h.short}</span>
+                          <span className="text-slate-900 whitespace-nowrap">{h.hours}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="text-sm text-orange-600 font-bold mt-2">Wizyty po wcześniejszym umówieniu telefonicznym.</p>
                   </div>
                 </div>
 

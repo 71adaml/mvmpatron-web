@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { OPENING_HOURS } from './openingHours';
 
 interface FooterProps {
   onOpenPrivacy?: () => void;
@@ -18,6 +19,11 @@ const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms }) => {
             <p className="text-slate-500 text-sm mb-4">
               ul. Wrocławska 32a, 55-330 Pisarzowice
             </p>
+            <ul className="text-slate-400 text-sm mb-4 space-y-1">
+              {OPENING_HOURS.map((h) => (
+                <li key={h.days}>{h.days}: <span className="text-slate-300 font-semibold">{h.hours}</span></li>
+              ))}
+            </ul>
             <div className="space-y-2 mb-8">
               <p className="text-orange-500 font-bold flex items-center gap-2">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,6 +58,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms }) => {
             <h4 className="font-bold text-lg mb-6">Szybkie Linki</h4>
             <ul className="space-y-4 text-slate-400">
               <li><a href="#usługi" className="hover:text-white transition-colors">Usługi</a></li>
+              <li><a href="#jak-sie-umowic" className="hover:text-white transition-colors">Jak się umówić</a></li>
               <li><a href="#kontakt" className="hover:text-white transition-colors">Kontakt</a></li>
             </ul>
           </div>
