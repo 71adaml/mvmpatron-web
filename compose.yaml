@@ -1,0 +1,39 @@
+# Production stack on the VPS: Caddy (HTTPS) in front of the website container.
+# Local test: docker compose up --build, then open http://localhost (set DOMAIN=localhost in .env).
+services:
+  web:
+    image: ${IMAGE:-ghcr.io/71adaml/mvmpatron-web:latest}
+    build: .
+    restart: unless-stopped
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3-flash-preview}
+    # No published ports: only Caddy can reach the app.
+    expose:
+      - "8080"
+    logging: &logging
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - web
+    environment:
+      DOMAIN: ${DOMAIN:-localhost}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    logging: *logging
+
+volumes:
+  caddy_data:
+  caddy_config:

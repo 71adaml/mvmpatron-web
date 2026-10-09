@@ -1,50 +1,26 @@
-# Stage 1: Build
-FROM node:22 AS builder
+# Stage 1: build the React site into /app/dist
+FROM node:22-alpine AS build
 WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
 
-# Kopiujemy wszystko
-COPY . ./
-
-# Budujemy frontend (jeśli istnieje)
-RUN if [ -f package.json ]; then npm install && npm run build; fi
-
-# Instalujemy zależności serwera
-WORKDIR /app/server
-RUN npm install
-
-# Stage 2: Final Image
-FROM node:22-slim
+# Stage 2: install only the server's production dependencies
+FROM node:22-alpine AS server-deps
 WORKDIR /app
+COPY server/package.json server/package-lock.json ./
+RUN npm ci --omit=dev
 
-# Kopiujemy zainstalowany serwer z Stage 1
-# Upewnij się, że server.js jest w folderze /app/server w Stage 1
-COPY --from=builder /app/server ./
-
-# Kopiujemy zbudowany frontend
-COPY --from=builder /app/dist ./dist
-
-# WAŻNE: Cloud Run używa portu 8080
-ENV PORT=8080
+# Stage 3: the image that runs in production
+FROM node:22-alpine
+ENV NODE_ENV=production PORT=8080
+WORKDIR /app
+COPY --from=server-deps /app/node_modules ./node_modules
+COPY server/package.json server/server.js ./
+COPY --from=build /app/dist ./dist
+USER node
 EXPOSE 8080
-
-# Uruchamiamy serwer
-CMD ["node", "server.js"]
-# Stage 2: Final Image
-FROM node:22-slim
-WORKDIR /app
-
-# Kopiujemy zainstalowany serwer
-COPY --from=builder /app/server ./
-
-# Kopiujemy zbudowany frontend (pliki JS/CSS)
-COPY --from=builder /app/dist ./dist
-
-# --- KLUCZOWA POPRAWKA ---
-# Kopiujemy folder public, aby obrazy były fizycznie w kontenerze
-COPY --from=builder /app/public ./public
-# -------------------------
-
-ENV PORT=8080
-EXPOSE 8080
-
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD wget -qO- http://127.0.0.1:8080/healthz || exit 1
 CMD ["node", "server.js"]
