@@ -110,7 +110,7 @@ Deploys stay switched off until `VPS_HOST` is set. Then delete the private key f
 ## 7. Move mvmpatron.pl to the VPS
 
 1. The day before: in the DNS zone, lower the TTL of the `A`/`AAAA` records for `mvmpatron.pl` and `www` to 300 seconds. Write down their current values; they are your rollback.
-2. On the VPS, set `DOMAIN=mvmpatron.pl` in `/opt/mvmpatron/.env`, then `cd /opt/mvmpatron && docker compose up -d`.
+2. On the VPS, set `DOMAIN=mvmpatron.pl` and add `WWW_DOMAIN=www.mvmpatron.pl` in `/opt/mvmpatron/.env`, then `cd /opt/mvmpatron && docker compose up -d`.
 3. In the DNS zone, point `mvmpatron.pl` and `www` (`A` records, plus `AAAA` if the VPS has IPv6) at the VPS. Delete any other `A`/`AAAA` records for those names that point at Google.
 4. **Do not touch the `MX`, `TXT`, `SPF` or `DKIM` records:** they carry email for `mvm@mvmpatron.pl`.
 5. Within a few minutes, https://mvmpatron.pl loads from the VPS and Caddy has its certificate. Check it as in step 6.

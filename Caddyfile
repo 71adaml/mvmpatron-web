@@ -1,5 +1,6 @@
-# Caddy gets and renews the HTTPS certificate for {$DOMAIN} automatically.
-www.{$DOMAIN} {
+# Caddy gets and renews the HTTPS certificates automatically.
+# WWW_DOMAIN redirects to DOMAIN; on the test address it stays www.localhost, which needs no DNS.
+{$WWW_DOMAIN} {
 	redir https://{$DOMAIN}{uri} permanent
 }
 
