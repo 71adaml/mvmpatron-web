@@ -16,11 +16,13 @@ code, comments and commit messages are in English.
 - Dev server (frontend only, no chat): `npm run dev` → http://localhost:3000
 - Type-check and build: `npm run build`
 - Run the built site with the server: `npm run build && cp -r dist server/ && GEMINI_API_KEY=... node server/server.js` → http://localhost:8080
-- Full production stack locally: `cp .env.example .env`, set `DOMAIN=localhost`, then `docker compose up --build` → https://localhost
+- Full production stack locally: `cp .env.example .env`, set `DOMAIN=localhost` and `TEST_DOMAIN=test.localhost`, then `docker compose up --build` → https://localhost
 
 ## Conventions
 - Components live in `components/`, one per file, styled with Tailwind classes
 - Images go in `public/images/` and are referenced as `/images/<file>`
 - Never put API keys in frontend code or the repo; secrets live in `.env` on the server
 - Work on a branch and open a pull request; `npm run build` must pass (CI checks it)
-- Merging to `main` deploys to production automatically via `.github/workflows/deploy.yml`
+- Merging to `main` deploys to the test site (test.mvmpatron.pl, container `web-test`) via
+  `.github/workflows/deploy.yml`. The public site (container `web`) changes only when someone runs
+  the "Publish to production" workflow (`.github/workflows/publish.yml`), which copies the test image

@@ -1,4 +1,6 @@
-# Production stack on the VPS: Caddy (HTTPS) in front of the website container.
+# Stack on the VPS: Caddy (HTTPS) in front of two copies of the site.
+# web is the public site (IMAGE), web-test is the test site (TEST_IMAGE). Merging to main updates
+# web-test; the "Publish to production" workflow copies the test version to web.
 # Local test: docker compose up --build, then open http://localhost (set DOMAIN=localhost in .env).
 services:
   web:
@@ -17,14 +19,26 @@ services:
         max-size: 10m
         max-file: "3"
 
+  web-test:
+    image: ${TEST_IMAGE:-ghcr.io/71adaml/mvmpatron-web:latest}
+    restart: unless-stopped
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3-flash-preview}
+    expose:
+      - "8080"
+    logging: *logging
+
   caddy:
     image: caddy:2-alpine
     restart: unless-stopped
     depends_on:
       - web
+      - web-test
     environment:
       DOMAIN: ${DOMAIN:-localhost}
       WWW_DOMAIN: ${WWW_DOMAIN:-www.localhost}
+      TEST_DOMAIN: ${TEST_DOMAIN:-test.localhost}
     ports:
       - "80:80"
       - "443:443"

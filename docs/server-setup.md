@@ -105,12 +105,20 @@ Deploys stay switched off until `VPS_HOST` is set. Then delete the private key f
 
 1. In the OVH Control Panel, open **Web Cloud > Domain names > mvmpatron.pl > DNS zone** and add an `A` record: subdomain `test`, target the VPS IPv4, TTL 300.
 2. In GitHub, open **Actions > Build and deploy > Run workflow** on `main`.
-3. When it finishes, open https://test.mvmpatron.pl and check the logo, the services, the map, the cookie banner and the AI chat, on a computer and a phone.
+3. On the VPS, add `TEST_DOMAIN=test.mvmpatron.pl` to `/opt/mvmpatron/.env` and leave `DOMAIN` unset (or `localhost`) until step 7, then `cd /opt/mvmpatron && sudo docker compose up -d`.
+4. When it finishes, open https://test.mvmpatron.pl and check the logo, the services, the map and the cookie banner, on a computer and a phone.
+
+### Test site and public site
+
+The VPS runs two copies of the site. Every merge to `main` goes to the **test site**
+(test.mvmpatron.pl). The **public site** (mvmpatron.pl) changes only when you run
+**Actions > Publish to production > Run workflow** in GitHub, which copies the version from the
+test site exactly as it is.
 
 ## 7. Move mvmpatron.pl to the VPS
 
 1. The day before: in the DNS zone, lower the TTL of the `A`/`AAAA` records for `mvmpatron.pl` and `www` to 300 seconds. Write down their current values; they are your rollback.
-2. On the VPS, set `DOMAIN=mvmpatron.pl` and add `WWW_DOMAIN=www.mvmpatron.pl` in `/opt/mvmpatron/.env`, then `cd /opt/mvmpatron && docker compose up -d`.
+2. In GitHub, run **Actions > Publish to production** so the public copy has the latest tested version. Then on the VPS, set `DOMAIN=mvmpatron.pl` and `WWW_DOMAIN=www.mvmpatron.pl` in `/opt/mvmpatron/.env` (keep `TEST_DOMAIN=test.mvmpatron.pl`), then `cd /opt/mvmpatron && sudo docker compose up -d`.
 3. In the DNS zone, point `mvmpatron.pl` and `www` (`A` records, plus `AAAA` if the VPS has IPv6) at the VPS. Delete any other `A`/`AAAA` records for those names that point at Google.
 4. **Do not touch the `MX`, `TXT`, `SPF` or `DKIM` records:** they carry email for `mvm@mvmpatron.pl`.
 5. Within a few minutes, https://mvmpatron.pl loads from the VPS and Caddy has its certificate. Check it as in step 6.
@@ -121,14 +129,15 @@ Rollback: put the old `A`/`AAAA` values back. Cloud Run is still running.
 
 In the Google Cloud console: remove the domain mapping for mvmpatron.pl, delete the Cloud Run
 service, delete the `gemini_api_key` secret and the images in Artifact Registry. Raise the DNS
-TTL back to 3600 and delete the `test` record.
+TTL back to 3600. Keep the `test` record: it is the test site.
 
 ## Day to day
 
 | Task | How |
 | --- | --- |
-| Deploy a change | Merge a pull request into `main`; GitHub Actions deploys it |
+| Try a change | Merge a pull request into `main`; it appears on https://test.mvmpatron.pl a few minutes later |
+| Make it public | Check the test site, then **Actions > Publish to production > Run workflow** in GitHub |
 | See what runs | `cd /opt/mvmpatron && docker compose ps` |
-| Read logs | `docker compose logs --tail 100 web` (or `caddy`) |
-| Roll back | Click **Revert** on the pull request in GitHub and merge the revert; it deploys the previous version |
+| Read logs | `docker compose logs --tail 100 web` (public), `web-test` (test) or `caddy` |
+| Roll back | Click **Revert** on the pull request in GitHub and merge the revert, check the test site, then publish |
 | Change the Gemini key | Edit `.env`, then `docker compose up -d` |

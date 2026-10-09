@@ -1,5 +1,6 @@
 # Caddy gets and renews the HTTPS certificates automatically.
-# WWW_DOMAIN redirects to DOMAIN; on the test address it stays www.localhost, which needs no DNS.
+# WWW_DOMAIN redirects to DOMAIN; TEST_DOMAIN serves the test site. Unset names fall back to
+# *.localhost, which needs no DNS.
 {$WWW_DOMAIN} {
 	redir https://{$DOMAIN}{uri} permanent
 }
@@ -16,4 +17,17 @@
 	}
 
 	reverse_proxy web:8080
+}
+
+# Test site: the version merged to main, before it is published. Kept out of search engines.
+{$TEST_DOMAIN} {
+	encode zstd gzip
+
+	header {
+		X-Robots-Tag "noindex, nofollow"
+		X-Content-Type-Options "nosniff"
+		-Server
+	}
+
+	reverse_proxy web-test:8080
 }

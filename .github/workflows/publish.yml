@@ -1,0 +1,51 @@
+# Publishes the version currently on the test site to the public site.
+# Run it from GitHub: Actions > Publish to production > Run workflow.
+# It reuses the exact image the test site runs, so nothing is rebuilt.
+name: Publish to production
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vps
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: vars.VPS_HOST != ''
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH
+        run: |
+          install -m 700 -d ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.VPS_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+
+      - name: Copy the test version to the public site
+        run: |
+          ssh "${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}" \
+            'set -e
+             cd /opt/mvmpatron
+             test_image=$(sed -n "s/^TEST_IMAGE=//p" .env)
+             if [ -z "$test_image" ]; then echo "Nothing on the test site yet: merge a change to main first."; exit 1; fi
+             echo "Publishing $test_image (was: $(sed -n "s/^IMAGE=//p" .env))"
+             sed -i "/^IMAGE=/d" .env
+             echo "IMAGE=$test_image" >> .env
+             docker compose up -d web'
+
+      - name: Wait for the public site to be healthy
+        run: |
+          ssh "${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}" \
+            'cd /opt/mvmpatron
+             for i in $(seq 1 12); do
+               status=$(docker inspect --format "{{.State.Health.Status}}" $(docker compose ps -q web))
+               echo "web: $status"
+               [ "$status" = healthy ] && exit 0
+               sleep 5
+             done
+             docker compose logs --tail 50 web
+             exit 1'
