@@ -9,15 +9,18 @@ Skip this if you already have `~/.ssh/id_ed25519.pub`.
 
 ```sh
 ssh-keygen -t ed25519 -C "adam@mvmpatron"
-cat ~/.ssh/id_ed25519.pub   # you paste this into the OVH order form
+cat ~/.ssh/id_ed25519.pub   # Windows PowerShell: type $env:USERPROFILE\.ssh\id_ed25519.pub
 ```
+
+If the VPS was ordered without a key, log in once with the emailed password and append that
+line to `~/.ssh/authorized_keys` on the server. Check that a key login works before step 3.
 
 ## 2. Order the VPS
 
 In the OVHcloud Control Panel, order a VPS with:
 
 - **Plan:** the smallest current tier is enough (the site uses about 100 MB of RAM).
-- **Image:** Ubuntu 24.04 (plain OS, no preinstalled apps).
+- **Image:** Ubuntu 24.04 or newer LTS (plain OS, no preinstalled apps). The live server runs 26.04.
 - **Location:** the data centre closest to Poland that is offered (Warsaw if available, otherwise Frankfurt, Strasbourg or Gravelines).
 - **SSH key:** paste the public key from step 1.
 - **Backups:** the automated backup option is worth enabling; the site itself has no data, but it saves redoing this setup.
@@ -30,26 +33,24 @@ Note the VPS IPv4 (and IPv6, if shown) from the confirmation email. OVH Ubuntu i
 ssh ubuntu@<VPS_IP>
 ```
 
-Then run, as `ubuntu`:
+Then run, as `ubuntu`. Paste one command at a time: `apt-get` reads the rest of a pasted block
+as its own input and the later lines never run.
 
 ```sh
-set -e
 sudo apt-get update && sudo apt-get -y upgrade
-sudo apt-get install -y ufw fail2ban unattended-upgrades
+sudo apt-get install -y ufw fail2ban unattended-upgrades docker.io docker-compose-v2
 
-# SSH: keys only, no root login
-printf 'PasswordAuthentication no\nPermitRootLogin no\n' | sudo tee /etc/ssh/sshd_config.d/90-hardening.conf
+# SSH: keys only, no root login. The 00- prefix matters: the first value sshd reads wins, and
+# cloud images ship 50-cloud-init.conf with PasswordAuthentication yes.
+printf 'PasswordAuthentication no\nKbdInteractiveAuthentication no\nPermitRootLogin no\n' | sudo tee /etc/ssh/sshd_config.d/00-hardening.conf
 sudo systemctl reload ssh
 
 # Firewall: SSH, HTTP, HTTPS only
 sudo ufw allow OpenSSH && sudo ufw allow 80/tcp && sudo ufw allow 443/tcp && sudo ufw allow 443/udp
 sudo ufw --force enable
 
-# Automatic security updates
-sudo dpkg-reconfigure -f noninteractive unattended-upgrades
-
-# Docker Engine + Compose plugin (official repository)
-curl -fsSL https://get.docker.com | sudo sh
+sudo systemctl enable --now docker fail2ban
+sudo sshd -T | grep -Ei '^(passwordauthentication|permitrootlogin)'   # both must say no
 
 # A separate user that GitHub Actions deploys as
 sudo adduser --disabled-password --gecos "" deploy
