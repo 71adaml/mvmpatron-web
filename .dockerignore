@@ -1,7 +1,14 @@
 node_modules
+server/node_modules
 dist
 .git
-.gitignore
+.github
+.env
+*.env
+!.env.example
 Dockerfile
-nginx.conf
+compose.yaml
+Caddyfile
+docs
 README.md
+CLAUDE.md

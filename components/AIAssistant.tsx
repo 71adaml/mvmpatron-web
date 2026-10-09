@@ -1,6 +1,5 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { GoogleGenAI } from "@google/genai";
 import { ChatMessage } from '../types';
 
 interface AIAssistantProps {
@@ -106,28 +105,15 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ onClose }) => {
     setIsLoading(true);
 
     try {
-      // Create fresh AI instance to ensure latest key is used
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      
-      // Filter the conversation history to ensure it starts with a 'user' message.
-      // Gemini's generateContent for chat-like multi-turn history expects the first entry to be from the user.
-      const apiHistory = updatedMessages
-        .filter((msg, index) => !(index === 0 && msg.role === 'assistant'))
-        .map(m => ({
-          role: m.role === 'assistant' ? 'model' : 'user',
-          parts: [{ text: m.content }]
-        }));
-
-      const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: apiHistory,
-        config: {
-          systemInstruction: 'Jesteś ekspertem wulkanizacji pracującym dla warsztatu MVM Patron w Pisarzowicach. Specjalizujemy się w: Motocyklach (szosowe, turystyczne, skutery, choppery), Serwisie dętek rowerowych, Autach 4x4, Autach osobowych oraz Detailingu kół. Odpowiadaj profesjonalnie, zwięźle i po polsku. Zawsze zachęcaj do kontaktu telefonicznego +48 721 456 905 w pilnych sprawach.',
-          temperature: 0.7,
-        }
+      // The server holds the Gemini API key and the system prompt.
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: updatedMessages.slice(-20) }),
       });
+      if (!response.ok) throw new Error(`Chat API error ${response.status}`);
 
-      const aiResponseText = response.text;
+      const { text: aiResponseText } = await response.json();
       if (!aiResponseText) throw new Error("Empty response from API");
       
       setMessages(prev => [...prev, { role: 'assistant', content: aiResponseText }]);

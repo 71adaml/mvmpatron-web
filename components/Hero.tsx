@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
           }}
         >
           <img 
-            src="MVM-PATRON.png" 
+            src="/images/MVM-PATRON.png" 
             alt="MVM Patron - Ilustracja warsztatu retro" 
             className="w-full h-full object-cover object-center"
           />
