@@ -1,5 +1,6 @@
 import React from 'react';
 import { OPENING_HOURS } from './openingHours';
+import ParallaxBackground from './ParallaxBackground';
 
 const steps = [
   { title: 'Zadzwoń', desc: 'Powiedz, jaki masz pojazd i czego potrzebujesz. Doradzimy przez telefon.' },
@@ -32,8 +33,9 @@ const faq = [
 
 const BookingInfo: React.FC = () => {
   return (
-    <section id="jak-sie-umowic" className="py-24">
-      <div className="container mx-auto px-6">
+    <section id="jak-sie-umowic" className="relative py-24 overflow-hidden">
+      <ParallaxBackground name="booking-office" overlayClassName="bg-gradient-to-b from-slate-50/85 via-slate-50/55 to-slate-50/85" />
+      <div className="container mx-auto px-6 relative">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Jak się umówić</h2>

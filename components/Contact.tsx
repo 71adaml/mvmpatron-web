@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { OPENING_HOURS } from './openingHours';
+import ParallaxBackground from './ParallaxBackground';
 
 const Contact: React.FC = () => {
   // Używamy Plus Code: 6V52+88 Pisarzowice, Polska oraz nazwy firmy w dymku
@@ -11,8 +12,9 @@ const Contact: React.FC = () => {
   const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(plusCode)}`;
 
   return (
-    <section id="kontakt" className="py-24">
-      <div className="container mx-auto px-6">
+    <section id="kontakt" className="relative py-24 overflow-hidden">
+      <ParallaxBackground name="contact-road" overlayClassName="bg-gradient-to-b from-slate-50/85 via-slate-50/55 to-slate-50/85" />
+      <div className="container mx-auto px-6 relative">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="reveal reveal-active">
