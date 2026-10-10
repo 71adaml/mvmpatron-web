@@ -115,6 +115,16 @@ The VPS runs two copies of the site. Every merge to `main` goes to the **test si
 **Actions > Publish to production > Run workflow** in GitHub, which copies the version from the
 test site exactly as it is.
 
+The test site asks for a login. The user name is `mvm` (`TEST_AUTH_USER` in `.env`). To set or
+change the password, run this on the VPS in one line, with your own password in place of
+`your-password`:
+
+```
+cd /opt/mvmpatron && h=$(sudo docker compose exec -T caddy caddy hash-password --plaintext 'your-password') && sudo sed -i '/^TEST_AUTH_HASH=/d' .env && echo "TEST_AUTH_HASH='$h'" | sudo tee -a .env && sudo docker compose up -d
+```
+
+Until a password is set, nobody can log in to the test site.
+
 ## 7. Move mvmpatron.pl to the VPS
 
 1. The day before: in the DNS zone, lower the TTL of the `A`/`AAAA` records for `mvmpatron.pl` and `www` to 300 seconds. Write down their current values; they are your rollback.

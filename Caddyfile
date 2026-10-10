@@ -19,8 +19,13 @@
 	reverse_proxy web:8080
 }
 
-# Test site: the version merged to main, before it is published. Kept out of search engines.
+# Test site: the version merged to main, before it is published. Kept out of search engines
+# and behind a login (TEST_AUTH_USER / TEST_AUTH_HASH from .env; see docs/server-setup.md).
 {$TEST_DOMAIN} {
+	basic_auth {
+		{$TEST_AUTH_USER} {$TEST_AUTH_HASH}
+	}
+
 	encode zstd gzip
 
 	header {

@@ -39,6 +39,10 @@ services:
       DOMAIN: ${DOMAIN:-localhost}
       WWW_DOMAIN: ${WWW_DOMAIN:-www.localhost}
       TEST_DOMAIN: ${TEST_DOMAIN:-test.localhost}
+      # Login for the test site. Until a hash is set in .env, the default below matches a
+      # random password nobody knows, so the test site stays locked.
+      TEST_AUTH_USER: ${TEST_AUTH_USER:-mvm}
+      TEST_AUTH_HASH: ${TEST_AUTH_HASH:-$$2a$$14$$iXJTnLYgZxOUAk1pOr5pj.KBwWoY6aipL.Msog0RcqX/2bGJoJIPa}
     ports:
       - "80:80"
       - "443:443"
