@@ -281,14 +281,14 @@ const Services: React.FC = () => {
 
   return (
     <section id="usługi" ref={sectionRef} className="relative py-32 overflow-hidden">
-      <ParallaxBackground name="services-workshop" overlayClassName="bg-gradient-to-b from-slate-50/85 via-slate-50/55 to-slate-50/85" />
+      <ParallaxBackground name="services-workshop" overlayClassName="bg-gradient-to-b from-slate-50/40 via-slate-50/10 to-slate-50/40" />
       <div className="container mx-auto px-6 relative z-10">
-        <div className={`text-center max-w-3xl mx-auto mb-24 reveal ${isVisible ? 'reveal-active' : ''}`}>
+        <div className={`on-image text-center max-w-3xl mx-auto mb-24 reveal ${isVisible ? 'reveal-active' : ''}`}>
           <div className="inline-block px-4 py-1.5 rounded-full bg-orange-600/10 border border-orange-600/20 text-orange-600 text-xs font-black uppercase tracking-[0.3em] mb-6">
             Ekspertyza & Technologia
           </div>
           <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-8 tracking-tighter leading-tight">Nasze Specjalizacje</h2>
-          <p className="text-xl text-slate-600 font-medium leading-relaxed">
+          <p className="text-xl text-slate-800 font-medium leading-relaxed">
             Kompleksowa opieka nad kołami Twojego pojazdu. Wykorzystujemy najbardziej zaawansowane maszyny, by zapewnić Ci absolutne bezpieczeństwo na drodze.
           </p>
         </div>
