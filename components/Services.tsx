@@ -1,3 +1,4 @@
+import ParallaxBackground from './ParallaxBackground';
 import React, { useEffect, useRef, useState } from 'react';
 
 interface ServiceItem {
@@ -280,6 +281,7 @@ const Services: React.FC = () => {
 
   return (
     <section id="usługi" ref={sectionRef} className="relative py-32 overflow-hidden">
+      <ParallaxBackground name="services-workshop" overlayClassName="bg-gradient-to-b from-slate-50/85 via-slate-50/55 to-slate-50/85" />
       <div className="container mx-auto px-6 relative z-10">
         <div className={`text-center max-w-3xl mx-auto mb-24 reveal ${isVisible ? 'reveal-active' : ''}`}>
           <div className="inline-block px-4 py-1.5 rounded-full bg-orange-600/10 border border-orange-600/20 text-orange-600 text-xs font-black uppercase tracking-[0.3em] mb-6">
