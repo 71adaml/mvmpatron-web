@@ -15,11 +15,19 @@ const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms }) => {
       <div className="container mx-auto px-6 relative">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-2">
+            <div className="flex items-center gap-4 mb-6">
+              <picture className="shrink-0">
+                <source type="image/webp" srcSet="/images/logo-96.webp 1x, /images/logo-192.webp 2x" />
+                <img src="/images/logo-96.png" alt="Logo MVM Patron" width={56} height={60} className="h-16 w-auto" loading="lazy" />
+              </picture>
+              <div className="text-sm leading-relaxed">
+                <p className="text-white font-bold text-base">MVM Patron Arkadiusz Nowak</p>
+                <p className="text-slate-300">ul. Wrocławska 32a, 55-330 Pisarzowice</p>
+                <p className="text-slate-300">NIP 8941349704</p>
+              </div>
+            </div>
             <p className="text-slate-400 max-sm mb-4">
               Serwis opon w Pisarzowicach koło Wrocławia. Wymiana, wyważanie i naprawy wulkanizacyjne: auta osobowe, 4x4, motocykle, quady, TIR, maszyny rolnicze i budowlane.
-            </p>
-            <p className="text-slate-500 text-sm mb-4">
-              ul. Wrocławska 32a, 55-330 Pisarzowice
             </p>
             <ul className="text-slate-400 text-sm mb-4 space-y-1">
               {OPENING_HOURS.map((h) => (

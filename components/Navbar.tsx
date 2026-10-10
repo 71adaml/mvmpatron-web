@@ -25,11 +25,10 @@ const Navbar: React.FC = () => {
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
-              <div className="bg-orange-600 p-2 rounded-lg shadow-lg shadow-orange-600/20">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-13c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"/>
-                </svg>
-              </div>
+              <picture>
+                <source type="image/webp" srcSet="/images/logo-96.webp 1x, /images/logo-192.webp 2x" />
+                <img src="/images/logo-96.png" alt="Logo MVM Patron" width={40} height={43} className="h-10 w-auto drop-shadow-md" />
+              </picture>
               <span className={`text-xl sm:text-2xl font-black tracking-tighter transition-colors duration-300 ${isScrolled || isMenuOpen ? 'text-slate-900' : 'text-white'}`}>
                 MVM<span className={`${isScrolled || isMenuOpen ? 'text-orange-600' : 'text-orange-500'}`}> PATRON</span>
               </span>
