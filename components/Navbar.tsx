@@ -26,8 +26,8 @@ const Navbar: React.FC = () => {
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
               <picture>
-                <source type="image/webp" srcSet="/images/logo-96.webp 1x, /images/logo-192.webp 2x" />
-                <img src="/images/logo-96.png" alt="Logo MVM Patron" width={40} height={43} className="h-10 w-auto drop-shadow-md" />
+                <source type="image/webp" srcSet="/images/logo-64.webp 1x, /images/logo-128.webp 2x" />
+                <img src="/images/logo-64.png" alt="Logo MVM Patron" width={96} height={48} className="h-9 sm:h-12 w-auto drop-shadow-md" />
               </picture>
               <span className={`text-xl sm:text-2xl font-black tracking-tighter transition-colors duration-300 ${isScrolled || isMenuOpen ? 'text-slate-900' : 'text-white'}`}>
                 MVM<span className={`${isScrolled || isMenuOpen ? 'text-orange-600' : 'text-orange-500'}`}> PATRON</span>

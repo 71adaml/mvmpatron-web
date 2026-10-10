@@ -17,8 +17,8 @@ const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms }) => {
           <div className="col-span-2">
             <div className="flex items-center gap-4 mb-6">
               <picture className="shrink-0">
-                <source type="image/webp" srcSet="/images/logo-96.webp 1x, /images/logo-192.webp 2x" />
-                <img src="/images/logo-96.png" alt="Logo MVM Patron" width={56} height={60} className="h-16 w-auto" loading="lazy" />
+                <source type="image/webp" srcSet="/images/logo-128.webp 1x, /images/logo-256.webp 2x" />
+                <img src="/images/logo-128.png" alt="Logo MVM Patron" width={160} height={80} className="h-16 sm:h-20 w-auto" loading="lazy" />
               </picture>
               <div className="text-sm leading-relaxed">
                 <p className="text-white font-bold text-base">MVM Patron Arkadiusz Nowak</p>
