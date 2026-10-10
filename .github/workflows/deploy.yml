@@ -1,6 +1,7 @@
 # Pull requests: check that the site and the Docker image build.
 # Pushes to main (and a weekly rebuild for security patches): build the image, push it to
-# GitHub Container Registry, then deploy it to the VPS once the VPS_HOST variable is set.
+# GitHub Container Registry, then deploy it to the TEST site on the VPS once the VPS_HOST
+# variable is set. The public site changes only through publish.yml.
 name: Build and deploy
 
 on:
@@ -15,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: deploy-${{ github.ref }}
+  group: ${{ github.ref == 'refs/heads/main' && 'vps' || format('build-{0}', github.ref) }}
   cancel-in-progress: false
 
 env:
@@ -81,28 +82,29 @@ jobs:
       - name: Copy the stack files
         run: scp compose.yaml Caddyfile "${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}:/opt/mvmpatron/"
 
-      - name: Pull and restart on the VPS
+      - name: Pull and restart the test site
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | ssh "${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}" \
             "set -e
              cd /opt/mvmpatron
              docker login ghcr.io -u '${{ github.actor }}' --password-stdin
-             sed -i '/^IMAGE=/d' .env
-             echo 'IMAGE=${{ env.IMAGE }}:sha-${{ github.sha }}' >> .env
-             docker compose pull web
-             docker compose up -d --remove-orphans
+             sed -i '/^TEST_IMAGE=/d' .env
+             echo 'TEST_IMAGE=${{ env.IMAGE }}:sha-${{ github.sha }}' >> .env
+             docker compose pull web-test
+             docker compose up -d --remove-orphans web-test caddy
+             docker compose exec -T caddy caddy reload --config /etc/caddy/Caddyfile
              docker logout ghcr.io
              docker image prune -f"
 
-      - name: Wait for the new container to be healthy
+      - name: Wait for the test site to be healthy
         run: |
           ssh "${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}" \
             'cd /opt/mvmpatron
              for i in $(seq 1 12); do
-               status=$(docker inspect --format "{{.State.Health.Status}}" $(docker compose ps -q web))
-               echo "web: $status"
+               status=$(docker inspect --format "{{.State.Health.Status}}" $(docker compose ps -q web-test))
+               echo "web-test: $status"
                [ "$status" = healthy ] && exit 0
                sleep 5
              done
-             docker compose logs --tail 50 web
+             docker compose logs --tail 50 web-test
              exit 1'
