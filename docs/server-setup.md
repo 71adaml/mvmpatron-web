@@ -116,11 +116,11 @@ The VPS runs two copies of the site. Every merge to `main` goes to the **test si
 test site exactly as it is.
 
 The test site asks for a login. The user name is `mvm` (`TEST_AUTH_USER` in `.env`). To set or
-change the password, run this on the VPS in one line, with your own password in place of
-`your-password`:
+change the password, run this on the VPS in one line. It asks for the new password (nothing
+shows while you type):
 
 ```
-cd /opt/mvmpatron && h=$(sudo docker compose exec -T caddy caddy hash-password --plaintext 'your-password') && sudo sed -i '/^TEST_AUTH_HASH=/d' .env && echo "TEST_AUTH_HASH='$h'" | sudo tee -a .env && sudo docker compose up -d
+cd /opt/mvmpatron && read -rsp 'New test site password: ' p && echo && h=$(sudo docker compose exec -T caddy caddy hash-password --plaintext "$p") && unset p && sudo sed -i '/^TEST_AUTH_HASH=/d' .env && echo "TEST_AUTH_HASH='$h'" | sudo tee -a .env >/dev/null && sudo docker compose up -d
 ```
 
 Until a password is set, nobody can log in to the test site.
