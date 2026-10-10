@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled || isMenuOpen ? 'bg-white shadow-lg py-3' : 'bg-transparent py-6 md:py-10 lg:py-14'}`}>
+      <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled || isMenuOpen ? 'bg-white/60 backdrop-blur-2xl backdrop-saturate-150 border-b border-white/70 shadow-lg shadow-slate-900/5 py-3' : 'bg-transparent py-6 md:py-10 lg:py-14'}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
@@ -112,7 +112,7 @@ const Navbar: React.FC = () => {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 z-40 bg-white transition-transform duration-500 ease-in-out transform ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'} md:hidden`}>
+      <div className={`fixed inset-0 z-40 bg-white/80 backdrop-blur-2xl transition-transform duration-500 ease-in-out transform ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'} md:hidden`}>
         <div className="flex flex-col items-center justify-center h-full gap-8 p-6">
           {navLinks.map((item) => (
             <a 

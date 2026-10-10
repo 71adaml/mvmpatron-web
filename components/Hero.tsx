@@ -22,15 +22,23 @@ const Hero: React.FC = () => {
             transform: `translateY(${offsetY * 0.4}px) scale(1.1)`,
           }}
         >
-          <img 
-            src="/images/MVM-PATRON.png" 
-            alt="MVM Patron - Ilustracja warsztatu retro" 
-            className="w-full h-full object-cover object-center"
-          />
+          <picture>
+            <source
+              type="image/webp"
+              srcSet="/images/hero-garage-1200.webp 1200w, /images/hero-garage-2400.webp 2400w"
+              sizes="100vw"
+            />
+            <img
+              src="/images/hero-garage-1200.jpg"
+              alt="MVM Patron - ilustracja retro stacji serwisowej o zachodzie słońca"
+              className="w-full h-full object-cover object-[75%_center] md:object-center"
+              fetchPriority="high"
+            />
+          </picture>
         </div>
         
         {/* Retro Dark Overlay for better text contrast and vintage vibe */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-900/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/70 via-slate-950/40 to-transparent"></div>
         <div className="absolute inset-0 bg-orange-950/10 mix-blend-overlay"></div>
         
         {/* Subtle Tire Tread Pattern Overlay */}
@@ -41,9 +49,9 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl">
+        <div className="max-w-4xl glass-dark rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-10 md:p-12 my-10">
           {/* Top Location Badge */}
-          <div className="flex flex-col items-start gap-4 mb-12 mt-12 animate-spring-up" style={{ animationDelay: '200ms' }}>
+          <div className="flex flex-col items-start gap-4 mb-8 animate-spring-up" style={{ animationDelay: '200ms' }}>
             <div className="flex flex-wrap items-center gap-3">
               <span className="inline-block px-5 py-2 rounded-xl bg-orange-600 text-white font-black text-sm uppercase tracking-[0.2em] shadow-lg shadow-orange-600/20">
                 Wrocław • Pisarzowice • Miękinia • Wilkszyn • Leśnica • Głoska • Mrozów • Krępice
@@ -51,7 +59,7 @@ const Hero: React.FC = () => {
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-8xl font-extrabold text-white leading-[1.1] mb-10 tracking-tighter drop-shadow-2xl animate-spring-up" style={{ animationDelay: '450ms' }}>
+          <h1 className="text-[2.3rem] sm:text-6xl md:text-8xl font-extrabold text-white leading-[1.1] mb-10 tracking-tighter drop-shadow-2xl animate-spring-up" style={{ animationDelay: '450ms' }}>
             Zaawansowana <br/>
             <span className="text-orange-600 inline-block mt-2 relative">
               wulkanizacja

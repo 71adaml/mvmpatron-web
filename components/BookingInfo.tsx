@@ -32,7 +32,7 @@ const faq = [
 
 const BookingInfo: React.FC = () => {
   return (
-    <section id="jak-sie-umowic" className="py-24 bg-slate-50">
+    <section id="jak-sie-umowic" className="py-24">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -44,7 +44,7 @@ const BookingInfo: React.FC = () => {
 
           <div className="grid md:grid-cols-3 gap-6 mb-20">
             {steps.map((step, index) => (
-              <div key={step.title} className="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm transition-all hover:shadow-lg">
+              <div key={step.title} className="p-8 rounded-3xl glass transition-all hover:-translate-y-1">
                 <div className="w-12 h-12 rounded-2xl bg-orange-600 text-white flex items-center justify-center font-black text-xl mb-6 shadow-lg shadow-orange-600/30">
                   {index + 1}
                 </div>
@@ -67,7 +67,7 @@ const BookingInfo: React.FC = () => {
             <h2 className="text-3xl font-extrabold text-slate-900 mb-8 tracking-tight text-center">Najczęstsze pytania</h2>
             <div className="space-y-4">
               {faq.map((item) => (
-                <details key={item.q} className="group p-6 rounded-3xl bg-white border border-slate-100 shadow-sm open:shadow-lg transition-all">
+                <details key={item.q} className="group p-6 rounded-3xl glass transition-all">
                   <summary className="flex justify-between items-center gap-4 cursor-pointer list-none font-bold text-slate-900 text-lg">
                     {item.q}
                     <svg className="w-5 h-5 text-orange-600 shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">

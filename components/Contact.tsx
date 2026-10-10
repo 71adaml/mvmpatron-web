@@ -11,7 +11,7 @@ const Contact: React.FC = () => {
   const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(plusCode)}`;
 
   return (
-    <section id="kontakt" className="py-24 bg-white">
+    <section id="kontakt" className="py-24">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -23,7 +23,7 @@ const Contact: React.FC = () => {
 
               <div className="space-y-6">
                 {/* Location Card */}
-                <div className="flex items-start gap-5 p-6 rounded-3xl bg-slate-50 border border-slate-100 transition-all hover:shadow-lg">
+                <div className="flex items-start gap-5 p-6 rounded-3xl glass transition-all hover:-translate-y-1">
                   <div className="bg-orange-100 p-4 rounded-2xl text-orange-600 shadow-sm">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -51,7 +51,7 @@ const Contact: React.FC = () => {
                 </div>
 
                 {/* Opening Hours Card */}
-                <div className="flex items-start gap-5 p-6 rounded-3xl bg-slate-50 border border-slate-100 transition-all hover:shadow-lg">
+                <div className="flex items-start gap-5 p-6 rounded-3xl glass transition-all hover:-translate-y-1">
                   <div className="bg-orange-100 p-4 rounded-2xl text-orange-600 shadow-sm">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -72,7 +72,7 @@ const Contact: React.FC = () => {
                 </div>
 
                 {/* Email Card */}
-                <div className="flex items-start gap-5 p-6 rounded-3xl bg-slate-50 border border-slate-100 transition-all hover:shadow-lg">
+                <div className="flex items-start gap-5 p-6 rounded-3xl glass transition-all hover:-translate-y-1">
                   <div className="bg-orange-100 p-4 rounded-2xl text-orange-600 shadow-sm">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -107,7 +107,7 @@ const Contact: React.FC = () => {
             </div>
 
             {/* Google Maps Container */}
-            <div className="rounded-[3rem] overflow-hidden h-[500px] shadow-2xl border-8 border-slate-50 relative bg-slate-100 reveal reveal-active" style={{transitionDelay: '200ms'}}>
+            <div className="rounded-[3rem] overflow-hidden h-[500px] shadow-2xl border-8 border-white/60 relative bg-white/40 backdrop-blur-xl reveal reveal-active" style={{transitionDelay: '200ms'}}>
                <iframe 
                  src={googleMapsUrl}
                  width="100%" 

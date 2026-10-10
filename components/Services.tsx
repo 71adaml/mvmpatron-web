@@ -201,7 +201,7 @@ const ServiceCard: React.FC<{ service: ServiceItem, index: number, isVisible: bo
       <div className={`relative w-full h-full transition-all duration-700 preserve-3d ${isFlipped ? 'is-flipped' : ''}`}>
         
         {/* Front Side: Enhanced Hover Effects with Scale and Highlight Glow */}
-        <div className="absolute inset-0 backface-hidden p-8 rounded-[2.5rem] bg-gradient-to-br from-white via-white to-slate-50/80 backdrop-blur-sm border-t border-l border-white/60 border-r border-b border-slate-200/40 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.4)] flex flex-col items-start transition-all duration-500 hover:shadow-[0_40px_80px_-15px_rgba(249,115,22,0.25)] hover:-translate-y-4 hover:scale-[1.03] hover:ring-4 hover:ring-orange-500/20 hover:border-orange-500 group overflow-hidden">
+        <div className="absolute inset-0 backface-hidden p-8 rounded-[2.5rem] glass flex flex-col items-start transition-all duration-500 hover:shadow-[0_40px_80px_-15px_rgba(249,115,22,0.25)] hover:-translate-y-4 hover:scale-[1.03] hover:ring-4 hover:ring-orange-500/20 group overflow-hidden">
           
           {/* Dynamic Decorative highlight gradient - animated on hover */}
           <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-to-br from-white/20 via-transparent to-transparent rotate-45 pointer-events-none group-hover:translate-x-1/4 group-hover:translate-y-1/4 transition-transform duration-1000" />
@@ -279,28 +279,14 @@ const Services: React.FC = () => {
   }, []);
 
   return (
-    <section id="usługi" ref={sectionRef} className="relative py-32 overflow-hidden bg-slate-950">
-      {/* Dynamic Background Wrapper with enhanced depth */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1549434764-98c430932c02?auto=format&fit=crop&q=80&w=2000" 
-          alt="Różne rodzaje opon w warsztacie" 
-          className="w-full h-full object-cover grayscale opacity-20 scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/90 to-slate-950 backdrop-blur-[2px]"></div>
-        
-        {/* Dynamic spot light effects */}
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-orange-600/10 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[150px] pointer-events-none" />
-      </div>
-
+    <section id="usługi" ref={sectionRef} className="relative py-32 overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <div className={`text-center max-w-3xl mx-auto mb-24 reveal ${isVisible ? 'reveal-active' : ''}`}>
-          <div className="inline-block px-4 py-1.5 rounded-full bg-orange-600/10 border border-orange-600/20 text-orange-500 text-xs font-black uppercase tracking-[0.3em] mb-6">
+          <div className="inline-block px-4 py-1.5 rounded-full bg-orange-600/10 border border-orange-600/20 text-orange-600 text-xs font-black uppercase tracking-[0.3em] mb-6">
             Ekspertyza & Technologia
           </div>
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-8 tracking-tighter leading-tight">Nasze Specjalizacje</h2>
-          <p className="text-xl text-slate-400 font-medium leading-relaxed">
+          <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-8 tracking-tighter leading-tight">Nasze Specjalizacje</h2>
+          <p className="text-xl text-slate-600 font-medium leading-relaxed">
             Kompleksowa opieka nad kołami Twojego pojazdu. Wykorzystujemy najbardziej zaawansowane maszyny, by zapewnić Ci absolutne bezpieczeństwo na drodze.
           </p>
         </div>
