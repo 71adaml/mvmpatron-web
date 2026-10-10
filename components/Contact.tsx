@@ -13,13 +13,13 @@ const Contact: React.FC = () => {
 
   return (
     <section id="kontakt" className="relative py-24 overflow-hidden">
-      <ParallaxBackground name="contact-road" overlayClassName="bg-gradient-to-b from-slate-50/85 via-slate-50/55 to-slate-50/85" />
+      <ParallaxBackground name="contact-road" overlayClassName="bg-gradient-to-b from-slate-50/40 via-slate-50/10 to-slate-50/40" />
       <div className="container mx-auto px-6 relative">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="reveal reveal-active">
-              <h2 className="text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Skontaktuj się z nami</h2>
-              <p className="text-lg text-slate-600 mb-10 font-medium">
+              <h2 className="on-image text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Skontaktuj się z nami</h2>
+              <p className="on-image text-lg text-slate-800 mb-10 font-medium">
                 Chcesz wymienić lub naprawić opony w aucie, motocyklu, ciężarówce albo maszynie rolniczej? Zadzwoń, a doradzimy i umówimy termin wizyty. Zapraszamy do warsztatu w Pisarzowicach, kilka minut od Wrocławia.
               </p>
 

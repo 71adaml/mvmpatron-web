@@ -34,12 +34,12 @@ const faq = [
 const BookingInfo: React.FC = () => {
   return (
     <section id="jak-sie-umowic" className="relative py-24 overflow-hidden">
-      <ParallaxBackground name="booking-office" overlayClassName="bg-gradient-to-b from-slate-50/85 via-slate-50/55 to-slate-50/85" />
+      <ParallaxBackground name="booking-office" overlayClassName="bg-gradient-to-b from-slate-50/40 via-slate-50/10 to-slate-50/40" />
       <div className="container mx-auto px-6 relative">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="on-image text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Jak się umówić</h2>
-            <p className="text-lg text-slate-600 font-medium">
+            <p className="text-lg text-slate-800 font-medium">
               Pracujemy na wizyty umówione telefonicznie. To proste:
             </p>
           </div>
@@ -66,7 +66,7 @@ const BookingInfo: React.FC = () => {
           </div>
 
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-extrabold text-slate-900 mb-8 tracking-tight text-center">Najczęstsze pytania</h2>
+            <h2 className="on-image text-3xl font-extrabold text-slate-900 mb-8 tracking-tight text-center">Najczęstsze pytania</h2>
             <div className="space-y-4">
               {faq.map((item) => (
                 <details key={item.q} className="group p-6 rounded-3xl glass transition-all">

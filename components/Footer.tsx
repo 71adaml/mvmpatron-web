@@ -11,7 +11,7 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms }) => {
   return (
     <footer className="relative overflow-hidden bg-slate-950 text-white py-16">
-      <ParallaxBackground name="footer-night" overlayClassName="bg-slate-950/70" />
+      <ParallaxBackground name="footer-night" overlayClassName="bg-gradient-to-b from-slate-950/70 via-slate-950/40 to-slate-950/70" />
       <div className="container mx-auto px-6 relative">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-2">
