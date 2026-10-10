@@ -22,11 +22,19 @@ const Hero: React.FC = () => {
             transform: `translateY(${offsetY * 0.4}px) scale(1.1)`,
           }}
         >
-          <img 
-            src="/images/MVM-PATRON.png" 
-            alt="MVM Patron - Ilustracja warsztatu retro" 
-            className="w-full h-full object-cover object-center"
-          />
+          <picture>
+            <source
+              type="image/webp"
+              srcSet="/images/hero-garage-1200.webp 1200w, /images/hero-garage-2400.webp 2400w"
+              sizes="100vw"
+            />
+            <img
+              src="/images/hero-garage-1200.jpg"
+              alt="MVM Patron - ilustracja retro stacji serwisowej o zachodzie słońca"
+              className="w-full h-full object-cover object-[75%_center] md:object-center"
+              fetchPriority="high"
+            />
+          </picture>
         </div>
         
         {/* Retro Dark Overlay for better text contrast and vintage vibe */}
