@@ -10,6 +10,7 @@ import AIAssistant from './components/AIAssistant';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import CookieBanner from './components/CookieBanner';
+import LiquidBackground from './components/LiquidBackground';
 
 // The AI chat is switched off until the Gemini project has billing again.
 // Set to true to bring the chat button back; the server side (/api/chat) is unchanged.
@@ -22,7 +23,8 @@ const App: React.FC = () => {
   const [isTermsOpen, setIsTermsOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col relative bg-slate-50 text-slate-900">
+    <div className="min-h-screen flex flex-col relative text-slate-900">
+      <LiquidBackground />
       <Navbar />
       
       <main className="flex-grow">
