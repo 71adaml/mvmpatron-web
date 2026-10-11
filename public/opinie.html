@@ -16,6 +16,7 @@
   .fb{background:#1877f2;color:#fff}
   .g{background:#f2e6c9;color:#141414}
   .small{font-size:14px;color:#bbb}
+  ol{text-align:left;line-height:1.6;margin:0 0 8px;padding-left:22px}
   [hidden]{display:none !important}
 </style>
 </head>
@@ -24,8 +25,12 @@
   <h1>MVM PATRON</h1>
   <p class="slogan">Stary styl, solidna robota.</p>
   <p id="msg">Otwieramy stronę z opiniami…</p>
+  <ol id="steps" hidden>
+    <li>Otwórz aplikację Facebook (przycisk poniżej).</li>
+    <li>Wpisz w wyszukiwarce <strong>MVM Patron</strong>.</li>
+    <li>Na naszej stronie kliknij <strong>Opinie</strong>, a potem <strong>Tak</strong> przy „Czy polecasz MVM Patron?”.</li>
+  </ol>
   <a class="btn fb" id="fb" href="https://www.facebook.com/mvmpatron/reviews/">Zostaw opinię na Facebooku</a>
-  <p class="small" id="fb-note" hidden>Wolisz Facebooka? Otwórz aplikację, wyszukaj „MVM Patron” i kliknij „Opinie”.</p>
   <a class="btn g" id="g" href="https://g.page/r/CWnSjGsr9J-eEAE/review">Oceń nas w Google</a>
   <p class="small">Dziękujemy, to dla nas ważne!<br>tel. / WhatsApp +48 721 456 905</p>
 </main>
@@ -34,13 +39,11 @@
   var ua = navigator.userAgent || "";
   if (/android/i.test(ua)) {
     // The Facebook app on Android opens the user's own feed for every facebook.com and fb:// link,
-    // and the browser route needs a separate Facebook login. Offer the Google review form, which
-    // opens straight in Google Maps, and tell Facebook fans how to reach the reviews tab themselves.
-    var fb = document.getElementById("fb");
-    fb.parentNode.insertBefore(document.getElementById("g"), fb);
-    fb.hidden = true;
-    document.getElementById("msg").textContent = "Zostaw nam opinię w Google, to zajmie chwilę:";
-    document.getElementById("fb-note").hidden = false;
+    // and the browser route needs a separate Facebook login. Show short steps instead; the button
+    // only has to open the app, which the feed link does.
+    document.getElementById("msg").hidden = true;
+    document.getElementById("steps").hidden = false;
+    document.getElementById("fb").textContent = "Otwórz Facebooka";
   } else {
     window.location.replace(WEB);
   }
