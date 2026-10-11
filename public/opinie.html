@@ -8,7 +8,7 @@
 <title>Opinie – MVM Patron</title>
 <style>
   body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#141414;color:#f2e6c9;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:center}
-  main{max-width:420px;padding:32px 20px}
+  main{box-sizing:border-box;width:100%;max-width:420px;padding:32px 20px}
   h1{font-family:Georgia,serif;font-size:34px;letter-spacing:2px;margin:0 0 4px}
   .slogan{color:#e0b040;font-style:italic;margin:0 0 28px}
   p{line-height:1.5}
@@ -16,6 +16,7 @@
   .fb{background:#1877f2;color:#fff}
   .g{background:#f2e6c9;color:#141414}
   .small{font-size:14px;color:#bbb}
+  [hidden]{display:none !important}
 </style>
 </head>
 <body>
@@ -24,22 +25,21 @@
   <p class="slogan">Stary styl, solidna robota.</p>
   <p id="msg">Otwieramy stronę z opiniami…</p>
   <a class="btn fb" id="fb" href="https://www.facebook.com/mvmpatron/reviews/">Zostaw opinię na Facebooku</a>
-  <p class="small" id="fb-note" hidden>Facebook otworzy się w przeglądarce.</p>
-  <a class="btn g" href="https://g.page/r/CWnSjGsr9J-eEAE/review">Oceń nas w Google</a>
+  <p class="small" id="fb-note" hidden>Wolisz Facebooka? Otwórz aplikację, wyszukaj „MVM Patron” i kliknij „Opinie”.</p>
+  <a class="btn g" id="g" href="https://g.page/r/CWnSjGsr9J-eEAE/review">Oceń nas w Google</a>
   <p class="small">Dziękujemy, to dla nas ważne!<br>tel. / WhatsApp +48 721 456 905</p>
 </main>
 <script>
   var WEB = "https://www.facebook.com/mvmpatron/reviews/";
   var ua = navigator.userAgent || "";
   if (/android/i.test(ua)) {
-    // The Facebook app on Android catches every facebook.com link (and fb:// links) and opens the
-    // user's own feed instead of the reviews tab. Open the tab in Chrome instead, which keeps the
-    // app out of it; without Chrome, the fallback URL loads in the current browser. Opening another
-    // app needs a tap, so Android gets buttons rather than an automatic redirect.
-    document.getElementById("fb").href =
-      "intent://www.facebook.com/mvmpatron/reviews/#Intent;scheme=https;package=com.android.chrome;" +
-      "S.browser_fallback_url=" + encodeURIComponent("https://m.facebook.com/mvmpatron/reviews/") + ";end";
-    document.getElementById("msg").textContent = "Wybierz, gdzie chcesz wystawić opinię:";
+    // The Facebook app on Android opens the user's own feed for every facebook.com and fb:// link,
+    // and the browser route needs a separate Facebook login. Offer the Google review form, which
+    // opens straight in Google Maps, and tell Facebook fans how to reach the reviews tab themselves.
+    var fb = document.getElementById("fb");
+    fb.parentNode.insertBefore(document.getElementById("g"), fb);
+    fb.hidden = true;
+    document.getElementById("msg").textContent = "Zostaw nam opinię w Google, to zajmie chwilę:";
     document.getElementById("fb-note").hidden = false;
   } else {
     window.location.replace(WEB);
