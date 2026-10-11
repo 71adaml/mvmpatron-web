@@ -24,6 +24,7 @@
   <p class="slogan">Stary styl, solidna robota.</p>
   <p id="msg">Otwieramy stronę z opiniami…</p>
   <a class="btn fb" id="fb" href="https://www.facebook.com/mvmpatron/reviews/">Zostaw opinię na Facebooku</a>
+  <p class="small" id="fb-note" hidden>Facebook otworzy się w przeglądarce.</p>
   <a class="btn g" href="https://g.page/r/CWnSjGsr9J-eEAE/review">Oceń nas w Google</a>
   <p class="small">Dziękujemy, to dla nas ważne!<br>tel. / WhatsApp +48 721 456 905</p>
 </main>
@@ -31,14 +32,15 @@
   var WEB = "https://www.facebook.com/mvmpatron/reviews/";
   var ua = navigator.userAgent || "";
   if (/android/i.test(ua)) {
-    // The Facebook app on Android opens the user's own feed for plain links to the reviews tab,
-    // so open the tab in the app's built-in web view instead.
-    var APP = "fb://facewebmodal/f?href=" + encodeURIComponent(WEB);
-    document.getElementById("fb").href = APP;
-    window.location.href = APP;
-    setTimeout(function () {
-      document.getElementById("msg").textContent = "Kliknij przycisk poniżej:";
-    }, 1500);
+    // The Facebook app on Android catches every facebook.com link (and fb:// links) and opens the
+    // user's own feed instead of the reviews tab. Open the tab in Chrome instead, which keeps the
+    // app out of it; without Chrome, the fallback URL loads in the current browser. Opening another
+    // app needs a tap, so Android gets buttons rather than an automatic redirect.
+    document.getElementById("fb").href =
+      "intent://www.facebook.com/mvmpatron/reviews/#Intent;scheme=https;package=com.android.chrome;" +
+      "S.browser_fallback_url=" + encodeURIComponent("https://m.facebook.com/mvmpatron/reviews/") + ";end";
+    document.getElementById("msg").textContent = "Wybierz, gdzie chcesz wystawić opinię:";
+    document.getElementById("fb-note").hidden = false;
   } else {
     window.location.replace(WEB);
   }
