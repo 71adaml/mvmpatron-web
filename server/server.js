@@ -98,6 +98,11 @@ app.post('/api/chat', chatLimiter, express.json({ limit: '50kb' }), async (req, 
   }
 });
 
+// Review QR codes on the posters point here; the page sends phones on to the Facebook reviews tab.
+app.get(['/opinie', '/opinie/'], (req, res) => {
+  res.set('Cache-Control', 'no-cache').sendFile(path.join(staticPath, 'opinie.html'));
+});
+
 // Hashed build assets never change, so browsers may cache them for a year.
 app.use('/assets', express.static(path.join(staticPath, 'assets'), { immutable: true, maxAge: '1y' }));
 app.use(express.static(staticPath, { maxAge: '1d', index: false }));
