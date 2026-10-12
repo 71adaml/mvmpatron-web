@@ -23,9 +23,9 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ onOpenPrivacy }) => {
     }
   }, []);
 
-  const saveConsent = (type: 'all' | 'essential') => {
+  const saveConsent = () => {
     const data = {
-      consent: type,
+      consent: 'essential',
       timestamp: Date.now()
     };
     localStorage.setItem('mvm-cookie-consent', JSON.stringify(data));
@@ -46,26 +46,18 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ onOpenPrivacy }) => {
           <div>
             <h4 className="text-slate-900 font-bold text-base mb-1 tracking-tight">Prywatność i Pliki Cookie</h4>
             <p className="text-slate-600 text-xs leading-relaxed font-medium">
-              Używamy plików cookie i narzędzi analitycznych, aby ulepszyć przeglądanie, wyświetlać spersonalizowane treści oraz analizować ruch w warsztacie MVM Patron. 
+              Nie używamy plików cookie do analityki ani reklam. Mapa dojazdu pochodzi z Google, które może zapisać własne pliki cookie. 
               Przejdź do <button onClick={onOpenPrivacy} className="text-orange-600 font-bold hover:underline">Zasad ochrony danych osobowych</button>, aby dowiedzieć się więcej.
             </p>
           </div>
         </div>
         
-        <div className="flex flex-col sm:flex-row gap-3">
-          <button 
-            onClick={() => saveConsent('all')}
-            className="flex-1 bg-orange-600 text-white text-xs font-black uppercase tracking-widest py-3 px-4 rounded-xl hover:bg-orange-700 transition-all shadow-lg shadow-orange-600/20 active:scale-95"
-          >
-            Akceptuję wszystkie
-          </button>
-          <button 
-            onClick={() => saveConsent('essential')}
-            className="flex-1 bg-slate-100 text-slate-700 text-xs font-black uppercase tracking-widest py-3 px-4 rounded-xl hover:bg-slate-200 transition-all active:scale-95"
-          >
-            Odrzuć opcjonalne
-          </button>
-        </div>
+        <button 
+          onClick={saveConsent}
+          className="w-full bg-orange-600 text-white text-xs font-black uppercase tracking-widest py-3 px-4 rounded-xl hover:bg-orange-700 transition-all shadow-lg shadow-orange-600/20 active:scale-95"
+        >
+          Rozumiem
+        </button>
       </div>
     </div>
   );
