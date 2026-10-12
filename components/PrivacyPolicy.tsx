@@ -40,12 +40,12 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onClose }) => {
               <li><strong>Realizacja usług serwisowych:</strong> naprawy opon, wulkanizacji, obsługi kół (Art. 6 ust. 1 lit. b RODO).</li>
               <li><strong>Komunikacja z asystentem AI:</strong> udzielanie odpowiedzi na Twoje zapytania techniczne (Art. 6 ust. 1 lit. f RODO – prawnie uzasadniony interes).</li>
               <li><strong>Prośba o opinię po wizycie:</strong> wiadomość SMS lub e-mail z prośbą o ocenę naszej usługi, wyłącznie za Twoją zgodą (Art. 6 ust. 1 lit. a RODO, art. 398 PKE) – szczegóły w punkcie 6.</li>
-              <li><strong>Statystyka i analityka:</strong> poprawa jakości strony internetowej (Art. 6 ust. 1 lit. a RODO – Twoja zgoda).</li>
             </ul>
           </section>
 
           <section>
             <h3 className="text-lg font-bold text-slate-900 mb-3">3. Polityka Plików Cookie</h3>
+            <p className="mb-4">Strona nie używa plików cookie do analityki ani reklam.</p>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse bg-white rounded-xl overflow-hidden border border-slate-200">
                 <thead>
@@ -58,18 +58,13 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onClose }) => {
                 <tbody className="divide-y divide-slate-100">
                   <tr>
                     <td className="p-4 font-semibold text-slate-900">Niezbędne (Techniczne)</td>
-                    <td className="p-4">Zapewnienie działania strony, zapamiętanie zgód na cookies.</td>
-                    <td className="p-4">Sesja / 6 miesięcy</td>
+                    <td className="p-4">Zapamiętanie w Twojej przeglądarce, że zamknąłeś komunikat o plikach cookie.</td>
+                    <td className="p-4">6 miesięcy</td>
                   </tr>
                   <tr>
-                    <td className="p-4 font-semibold text-slate-900">Analityczne</td>
-                    <td className="p-4">Analiza ruchu w serwisie (np. Google Analytics), optymalizacja treści.</td>
-                    <td className="p-4">Do 2 lat</td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 font-semibold text-slate-900">Marketingowe</td>
-                    <td className="p-4">Wyświetlanie dopasowanych treści na platformach społecznościowych.</td>
-                    <td className="p-4">Do 1 roku</td>
+                    <td className="p-4 font-semibold text-slate-900">Mapa Google</td>
+                    <td className="p-4">Wyświetlenie mapy dojazdu w sekcji Kontakt. Google może przy tym zapisać własne pliki cookie (zasady: policies.google.com/privacy).</td>
+                    <td className="p-4">Według zasad Google</td>
                   </tr>
                 </tbody>
               </table>
@@ -90,7 +85,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onClose }) => {
               </div>
               <div className="p-4 bg-slate-50 rounded-xl">
                 <p className="font-bold text-slate-900 text-sm mb-1">Prawo do sprzeciwu</p>
-                <p className="text-xs">Możesz sprzeciwić się przetwarzaniu danych w celach analitycznych.</p>
+                <p className="text-xs">Możesz sprzeciwić się przetwarzaniu danych opartemu na naszym prawnie uzasadnionym interesie.</p>
               </div>
               <div className="p-4 bg-slate-50 rounded-xl">
                 <p className="font-bold text-slate-900 text-sm mb-1">Prawo do wycofania zgody</p>
