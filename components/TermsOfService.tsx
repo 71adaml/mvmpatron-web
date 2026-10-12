@@ -35,13 +35,13 @@ const TermsOfService: React.FC<TermsOfServiceProps> = ({ onClose }) => {
               Postanowienia ogólne
             </h3>
             <p className="mb-3">
-              Niniejszy Regulamin określa zasady korzystania z serwisu internetowego dostępnego pod adresem mvm-patron.pl (dalej: „Serwis”).
+              Niniejszy Regulamin określa zasady korzystania z serwisu internetowego dostępnego pod adresem mvmpatron.pl (dalej: „Serwis”).
             </p>
             <p>
               Właścicielem Serwisu oraz Administratorem danych jest: <br/>
-              <strong className="text-slate-900">MVM Patron</strong><br/>
+              <strong className="text-slate-900">MVM Patron Arkadiusz Nowak</strong>, NIP 8941349704<br/>
               z siedzibą pod adresem: <strong className="text-slate-900">ul. Wrocławska 32a, 55-330 Pisarzowice</strong><br/>
-              Kontakt: <strong className="text-slate-900">+48 721 456 905</strong>
+              Kontakt: <strong className="text-slate-900">+48 721 456 905</strong>, <strong className="text-slate-900">mvm@mvmpatron.pl</strong>
             </p>
           </section>
 

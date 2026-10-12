@@ -29,7 +29,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onClose }) => {
           <section className="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
             <h3 className="text-lg font-bold text-slate-900 mb-3">1. Kto jest administratorem danych?</h3>
             <p>
-              Administratorem Twoich danych osobowych jest <strong>MVM Patron</strong> z siedzibą w Pisarzowicach, ul. Wrocławska 32a. Możesz się z nami skontaktować pod numerem telefonu: <strong>+48 721 456 905</strong>.
+              Administratorem Twoich danych osobowych jest <strong>MVM Patron Arkadiusz Nowak</strong>, ul. Wrocławska 32a, 55-330 Pisarzowice, NIP 8941349704. Możesz się z nami skontaktować pod numerem telefonu: <strong>+48 721 456 905</strong> lub e-mailem: <strong>mvm@mvmpatron.pl</strong>.
             </p>
           </section>
 
@@ -39,6 +39,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onClose }) => {
             <ul className="list-disc pl-5 space-y-2">
               <li><strong>Realizacja usług serwisowych:</strong> naprawy opon, wulkanizacji, obsługi kół (Art. 6 ust. 1 lit. b RODO).</li>
               <li><strong>Komunikacja z asystentem AI:</strong> udzielanie odpowiedzi na Twoje zapytania techniczne (Art. 6 ust. 1 lit. f RODO – prawnie uzasadniony interes).</li>
+              <li><strong>Prośba o opinię po wizycie:</strong> wiadomość SMS lub e-mail z prośbą o ocenę naszej usługi, wyłącznie za Twoją zgodą (Art. 6 ust. 1 lit. a RODO, art. 398 PKE) – szczegóły w punkcie 6.</li>
               <li><strong>Statystyka i analityka:</strong> poprawa jakości strony internetowej (Art. 6 ust. 1 lit. a RODO – Twoja zgoda).</li>
             </ul>
           </section>
@@ -92,6 +93,10 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onClose }) => {
                 <p className="text-xs">Możesz sprzeciwić się przetwarzaniu danych w celach analitycznych.</p>
               </div>
               <div className="p-4 bg-slate-50 rounded-xl">
+                <p className="font-bold text-slate-900 text-sm mb-1">Prawo do wycofania zgody</p>
+                <p className="text-xs">Zgodę możesz wycofać w każdej chwili (np. e-mailem na mvm@mvmpatron.pl lub telefonicznie). Nie wpływa to na zgodność z prawem wcześniejszego przetwarzania.</p>
+              </div>
+              <div className="p-4 bg-slate-50 rounded-xl">
                 <p className="font-bold text-slate-900 text-sm mb-1">Skarga do organu</p>
                 <p className="text-xs">Masz prawo wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych.</p>
               </div>
@@ -102,6 +107,13 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onClose }) => {
             <h3 className="text-lg font-bold text-slate-900 mb-3">5. Okres przechowywania</h3>
             <p>
               Dane przechowywane są przez okres niezbędny do realizacji celu (np. zakończenie usługi serwisowej) lub do momentu wycofania zgody przez Użytkownika, jednak nie dłużej niż wymagają tego przepisy podatkowe i księgowe.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-lg font-bold text-slate-900 mb-3">6. Prośba o opinię po wizycie</h3>
+            <p>
+              Administrator danych: MVM Patron Arkadiusz Nowak, ul. Wrocławska 32a, 55-330 Pisarzowice, NIP 8941349704, e-mail mvm@mvmpatron.pl. Za Twoją zgodą wykorzystamy numer telefonu i/lub adres e-mail, aby po wizycie poprosić Cię o opinię (art. 6 ust. 1 lit. a RODO, art. 398 PKE). Dane przechowujemy do czasu wycofania zgody, a sam zapis zgody i jej cofnięcia przez okres przedawnienia roszczeń. Wiadomości wysyłamy przez OVH SAS (bramka SMS, poczta), z którym mamy umowę powierzenia.
             </p>
           </section>
         </div>
